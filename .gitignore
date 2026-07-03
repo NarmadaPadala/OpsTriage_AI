@@ -86,12 +86,17 @@ data/sample/*
 !data/processed/splits/*.jsonl
 !data/sample/sample_incidents.csv
 models/*
+models/checkpoints/
+models/merged/
 !models/.gitkeep
 outputs/*
 !outputs/.gitkeep
 !outputs/data_quality/
 !outputs/data_quality/.gitkeep
 !outputs/data_quality/*.md
+!outputs/evaluation/
+!outputs/evaluation/.gitkeep
+!outputs/evaluation/*.md
 *.pkl
 *.joblib
 *.pt
@@ -100,6 +105,10 @@ outputs/*
 *.onnx
 *.ckpt
 *.bin
+optimizer.pt
+scheduler.pt
+training_args.bin
+trainer_state.json
 
 # Hugging Face and experiment tracking
 .cache/
@@ -158,4 +167,3 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 cython_debug/
-
