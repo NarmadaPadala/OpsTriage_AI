@@ -1,0 +1,71 @@
+# OpsTriage AI - LLaMA Factory LoRA SFT configuration
+#
+# Purpose:
+#   Fine-tune Qwen3-1.7B with LoRA for enterprise production incident
+#   support-team classification.
+#
+# Safety:
+#   This file is configuration only. Do not run training until the dataset,
+#   runtime, GPU availability, and LLaMA Factory version are confirmed.
+#
+# Dataset registration:
+#   Copy or merge configs/training/dataset_info_opstriage.json into the
+#   LLaMA Factory data/dataset_info.json file, or point LLaMA Factory to the
+#   equivalent dataset registry location supported by the installed version.
+
+### model
+model_name_or_path: Qwen/Qwen3-1.7B
+trust_remote_code: true
+
+### method
+stage: sft
+do_train: true
+finetuning_type: lora
+lora_rank: 16
+lora_alpha: 32
+lora_dropout: 0.05
+lora_target: all
+
+### dataset
+dataset: opstriage_train
+eval_dataset: opstriage_validation
+template: qwen
+cutoff_len: 1024
+max_samples: null
+overwrite_cache: true
+preprocessing_num_workers: 4
+
+### output
+output_dir: models/checkpoints/qwen3-1.7b-lora-opstriage-v0.1.0
+logging_dir: outputs/training_logs/qwen3-1.7b-lora-opstriage-v0.1.0
+overwrite_output_dir: false
+save_strategy: epoch
+save_total_limit: 3
+load_best_model_at_end: true
+metric_for_best_model: eval_macro_f1
+greater_is_better: true
+
+### train
+per_device_train_batch_size: 2
+per_device_eval_batch_size: 2
+gradient_accumulation_steps: 8
+learning_rate: 0.0001
+num_train_epochs: 4
+lr_scheduler_type: cosine
+warmup_ratio: 0.05
+optim: adamw_torch
+bf16: true
+fp16: false
+seed: 42
+
+### eval
+do_eval: true
+eval_strategy: epoch
+predict_with_generate: true
+generation_max_new_tokens: 32
+
+### reporting
+report_to: none
+logging_steps: 10
+plot_loss: true
+

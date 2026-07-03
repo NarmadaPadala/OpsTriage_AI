@@ -1,0 +1,242 @@
+[
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are OpsTriage AI, an enterprise incident triage assistant. Classify the incident into exactly one approved support team. Return only the support team name."
+      },
+      {
+        "role": "user",
+        "content": "Incident Title: Incorrect denial reason showing for outpatient claims\nIncident Description: Customer support reports several outpatient claims are denying with reason code D421 even though the billed procedure is covered under the plan. The same providers had successful claims last week. Need review of claims rules or edit logic.\n\nApproved Support Teams: Claims Engineering, Membership Engineering, Provider Systems, Digital Experience, Billing Systems, Data Engineering, API Platform, Integration Services, Infrastructure, Database Engineering, Identity & Access, Security, Reporting & Analytics, Batch Processing, DevOps"
+      },
+      {
+        "role": "assistant",
+        "content": "Claims Engineering"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are OpsTriage AI, an enterprise incident triage assistant. Classify the incident into exactly one approved support team. Return only the support team name."
+      },
+      {
+        "role": "user",
+        "content": "Incident Title: Dependent not linked under subscriber\nIncident Description: A dependent added through the morning enrollment feed is visible as a separate member but not linked to the subscriber household. Claims team needs household relationship fixed before processing.\n\nApproved Support Teams: Claims Engineering, Membership Engineering, Provider Systems, Digital Experience, Billing Systems, Data Engineering, API Platform, Integration Services, Infrastructure, Database Engineering, Identity & Access, Security, Reporting & Analytics, Batch Processing, DevOps"
+      },
+      {
+        "role": "assistant",
+        "content": "Membership Engineering"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are OpsTriage AI, an enterprise incident triage assistant. Classify the incident into exactly one approved support team. Return only the support team name."
+      },
+      {
+        "role": "user",
+        "content": "Incident Title: Provider roster upload stuck validating\nIncident Description: A large provider roster upload has been in validating status for 90 minutes. No failure email was generated. Upload contains 2,400 records and blocks network update deadline.\n\nApproved Support Teams: Claims Engineering, Membership Engineering, Provider Systems, Digital Experience, Billing Systems, Data Engineering, API Platform, Integration Services, Infrastructure, Database Engineering, Identity & Access, Security, Reporting & Analytics, Batch Processing, DevOps"
+      },
+      {
+        "role": "assistant",
+        "content": "Provider Systems"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are OpsTriage AI, an enterprise incident triage assistant. Classify the incident into exactly one approved support team. Return only the support team name."
+      },
+      {
+        "role": "user",
+        "content": "Incident Title: Benefits page layout broken on Safari\nIncident Description: Benefits summary cards overlap on Safari for employer group members. Data appears to load but page is unreadable. Call center is sending screenshots from multiple users.\n\nApproved Support Teams: Claims Engineering, Membership Engineering, Provider Systems, Digital Experience, Billing Systems, Data Engineering, API Platform, Integration Services, Infrastructure, Database Engineering, Identity & Access, Security, Reporting & Analytics, Batch Processing, DevOps"
+      },
+      {
+        "role": "assistant",
+        "content": "Digital Experience"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are OpsTriage AI, an enterprise incident triage assistant. Classify the incident into exactly one approved support team. Return only the support team name."
+      },
+      {
+        "role": "user",
+        "content": "Incident Title: Employer bill PDF missing adjustment section\nIncident Description: Generated employer bill PDFs no longer include adjustment details. Billing UI shows adjustments correctly. PDF output changed after last template deployment.\n\nApproved Support Teams: Claims Engineering, Membership Engineering, Provider Systems, Digital Experience, Billing Systems, Data Engineering, API Platform, Integration Services, Infrastructure, Database Engineering, Identity & Access, Security, Reporting & Analytics, Batch Processing, DevOps"
+      },
+      {
+        "role": "assistant",
+        "content": "Billing Systems"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are OpsTriage AI, an enterprise incident triage assistant. Classify the incident into exactly one approved support team. Return only the support team name."
+      },
+      {
+        "role": "user",
+        "content": "Incident Title: ETL job completed but dashboard stale\nIncident Description: Daily ETL marked success, but executive dashboard still shows prior day membership counts. Data warehouse table timestamp did not advance after transform step.\n\nApproved Support Teams: Claims Engineering, Membership Engineering, Provider Systems, Digital Experience, Billing Systems, Data Engineering, API Platform, Integration Services, Infrastructure, Database Engineering, Identity & Access, Security, Reporting & Analytics, Batch Processing, DevOps"
+      },
+      {
+        "role": "assistant",
+        "content": "Data Engineering"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are OpsTriage AI, an enterprise incident triage assistant. Classify the incident into exactly one approved support team. Return only the support team name."
+      },
+      {
+        "role": "user",
+        "content": "Incident Title: Claims API timeout above normal\nIncident Description: Claims status API latency jumped from 300 ms to over 8 seconds. Several consumers are getting gateway timeout. No code deploy reported for claims service today.\n\nApproved Support Teams: Claims Engineering, Membership Engineering, Provider Systems, Digital Experience, Billing Systems, Data Engineering, API Platform, Integration Services, Infrastructure, Database Engineering, Identity & Access, Security, Reporting & Analytics, Batch Processing, DevOps"
+      },
+      {
+        "role": "assistant",
+        "content": "API Platform"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are OpsTriage AI, an enterprise incident triage assistant. Classify the incident into exactly one approved support team. Return only the support team name."
+      },
+      {
+        "role": "user",
+        "content": "Incident Title: Inbound lab results interface rejecting messages\nIncident Description: Interface engine is rejecting inbound lab result messages with segment validation errors. Sending partner says format did not change. Rejects started after interface engine patch.\n\nApproved Support Teams: Claims Engineering, Membership Engineering, Provider Systems, Digital Experience, Billing Systems, Data Engineering, API Platform, Integration Services, Infrastructure, Database Engineering, Identity & Access, Security, Reporting & Analytics, Batch Processing, DevOps"
+      },
+      {
+        "role": "assistant",
+        "content": "Integration Services"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are OpsTriage AI, an enterprise incident triage assistant. Classify the incident into exactly one approved support team. Return only the support team name."
+      },
+      {
+        "role": "user",
+        "content": "Incident Title: Disk space alert on claims app servers\nIncident Description: Claims application servers show /var/log at 98 percent usage. App is still running but logs are no longer rotating. Need infra cleanup before service impact.\n\nApproved Support Teams: Claims Engineering, Membership Engineering, Provider Systems, Digital Experience, Billing Systems, Data Engineering, API Platform, Integration Services, Infrastructure, Database Engineering, Identity & Access, Security, Reporting & Analytics, Batch Processing, DevOps"
+      },
+      {
+        "role": "assistant",
+        "content": "Infrastructure"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are OpsTriage AI, an enterprise incident triage assistant. Classify the incident into exactly one approved support team. Return only the support team name."
+      },
+      {
+        "role": "user",
+        "content": "Incident Title: Reporting DB table locked by long session\nIncident Description: Reporting refresh is blocked because a long-running session has locked the claims aggregate table. Analysts cannot access today's report data.\n\nApproved Support Teams: Claims Engineering, Membership Engineering, Provider Systems, Digital Experience, Billing Systems, Data Engineering, API Platform, Integration Services, Infrastructure, Database Engineering, Identity & Access, Security, Reporting & Analytics, Batch Processing, DevOps"
+      },
+      {
+        "role": "assistant",
+        "content": "Database Engineering"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are OpsTriage AI, an enterprise incident triage assistant. Classify the incident into exactly one approved support team. Return only the support team name."
+      },
+      {
+        "role": "user",
+        "content": "Incident Title: SSO login loop for internal users\nIncident Description: Internal users are redirected between SSO and the application until browser times out. Clearing cookies does not fix it. Started after identity provider metadata update.\n\nApproved Support Teams: Claims Engineering, Membership Engineering, Provider Systems, Digital Experience, Billing Systems, Data Engineering, API Platform, Integration Services, Infrastructure, Database Engineering, Identity & Access, Security, Reporting & Analytics, Batch Processing, DevOps"
+      },
+      {
+        "role": "assistant",
+        "content": "Identity & Access"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are OpsTriage AI, an enterprise incident triage assistant. Classify the incident into exactly one approved support team. Return only the support team name."
+      },
+      {
+        "role": "user",
+        "content": "Incident Title: Unexpected admin permission granted\nIncident Description: Audit report shows a user received admin permission without approved access ticket. Need investigate entitlement change and potential policy violation.\n\nApproved Support Teams: Claims Engineering, Membership Engineering, Provider Systems, Digital Experience, Billing Systems, Data Engineering, API Platform, Integration Services, Infrastructure, Database Engineering, Identity & Access, Security, Reporting & Analytics, Batch Processing, DevOps"
+      },
+      {
+        "role": "assistant",
+        "content": "Security"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are OpsTriage AI, an enterprise incident triage assistant. Classify the incident into exactly one approved support team. Return only the support team name."
+      },
+      {
+        "role": "user",
+        "content": "Incident Title: Claims aging report missing current week\nIncident Description: Claims aging report does not include claims received this week. Underlying claim table has records. Report filter may be using wrong service date.\n\nApproved Support Teams: Claims Engineering, Membership Engineering, Provider Systems, Digital Experience, Billing Systems, Data Engineering, API Platform, Integration Services, Infrastructure, Database Engineering, Identity & Access, Security, Reporting & Analytics, Batch Processing, DevOps"
+      },
+      {
+        "role": "assistant",
+        "content": "Reporting & Analytics"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are OpsTriage AI, an enterprise incident triage assistant. Classify the incident into exactly one approved support team. Return only the support team name."
+      },
+      {
+        "role": "user",
+        "content": "Incident Title: Nightly claims batch abended at pricing step\nIncident Description: Nightly claims batch stopped at pricing step with return code 12. No downstream claim extracts were created. Operations needs restart instructions before morning cutoff.\n\nApproved Support Teams: Claims Engineering, Membership Engineering, Provider Systems, Digital Experience, Billing Systems, Data Engineering, API Platform, Integration Services, Infrastructure, Database Engineering, Identity & Access, Security, Reporting & Analytics, Batch Processing, DevOps"
+      },
+      {
+        "role": "assistant",
+        "content": "Batch Processing"
+      }
+    ]
+  },
+  {
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are OpsTriage AI, an enterprise incident triage assistant. Classify the incident into exactly one approved support team. Return only the support team name."
+      },
+      {
+        "role": "user",
+        "content": "Incident Title: Build artifact checksum mismatch\nIncident Description: CI pipeline failed because generated artifact checksum does not match metadata. No code changes in dependency module. Need DevOps review before release window.\n\nApproved Support Teams: Claims Engineering, Membership Engineering, Provider Systems, Digital Experience, Billing Systems, Data Engineering, API Platform, Integration Services, Infrastructure, Database Engineering, Identity & Access, Security, Reporting & Analytics, Batch Processing, DevOps"
+      },
+      {
+        "role": "assistant",
+        "content": "DevOps"
+      }
+    ]
+  }
+]

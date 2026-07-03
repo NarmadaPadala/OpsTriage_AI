@@ -1,0 +1,87 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.python-version
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+*.egg-info/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.crt
+secrets/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data and ML artifacts
+data/raw/*
+data/processed/*
+data/sample/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/sample/.gitkeep
+!data/processed/splits/
+!data/processed/splits/.gitkeep
+!data/processed/splits/*.json
+!data/processed/splits/*.jsonl
+!data/sample/sample_incidents.csv
+models/*
+!models/.gitkeep
+outputs/*
+!outputs/.gitkeep
+!outputs/data_quality/
+!outputs/data_quality/.gitkeep
+!outputs/data_quality/*.md
+*.pkl
+*.joblib
+*.pt
+*.pth
+*.safetensors
+*.onnx
+*.ckpt
+*.bin
+
+# Hugging Face and experiment tracking
+.cache/
+huggingface/
+wandb/
+mlruns/
+runs/
+lightning_logs/
+
+# Logs
+*.log
+logs/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# VS Code
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# OS and editor noise
+*.swp
+*.swo
+*~

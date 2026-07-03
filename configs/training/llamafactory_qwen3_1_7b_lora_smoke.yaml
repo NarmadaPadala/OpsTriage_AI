@@ -1,0 +1,58 @@
+# OpsTriage AI - LLaMA Factory LoRA smoke-training configuration
+#
+# This config is for a tiny environment validation run only.
+# Do not use it for model-quality claims.
+
+### model
+model_name_or_path: Qwen/Qwen3-1.7B
+trust_remote_code: true
+
+### method
+stage: sft
+do_train: true
+finetuning_type: lora
+lora_rank: 8
+lora_alpha: 16
+lora_dropout: 0.05
+lora_target: all
+
+### dataset
+dataset: opstriage_train
+eval_dataset: opstriage_validation
+template: qwen
+cutoff_len: 512
+max_samples: 12
+overwrite_cache: true
+preprocessing_num_workers: 1
+
+### output
+output_dir: models/checkpoints/_smoke/qwen3-1.7b-lora-opstriage-smoke
+logging_dir: outputs/training_logs/_smoke/qwen3-1.7b-lora-opstriage-smoke
+overwrite_output_dir: true
+save_strategy: "no"
+save_total_limit: 1
+
+### train
+per_device_train_batch_size: 1
+per_device_eval_batch_size: 1
+gradient_accumulation_steps: 1
+learning_rate: 0.0001
+num_train_epochs: 1
+lr_scheduler_type: cosine
+warmup_ratio: 0.0
+optim: adamw_torch
+bf16: false
+fp16: false
+seed: 42
+
+### eval
+do_eval: true
+eval_strategy: epoch
+predict_with_generate: false
+generation_max_new_tokens: 32
+
+### reporting
+report_to: none
+logging_steps: 1
+plot_loss: false
+
