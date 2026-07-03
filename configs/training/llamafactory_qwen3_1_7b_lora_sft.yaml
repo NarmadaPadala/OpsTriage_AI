@@ -62,10 +62,9 @@ seed: 42
 do_eval: true
 eval_strategy: epoch
 predict_with_generate: true
-generation_max_new_tokens: 32
+max_new_tokens: 32
 
 ### reporting
 report_to: none
 logging_steps: 10
 plot_loss: true
-
