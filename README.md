@@ -209,7 +209,7 @@ owners.
 
 ## Evaluation Summary
 
-The Week 5 LLaMA Factory training run completed successfully on NVIDIA Brev.
+LLaMA Factory training run completed successfully on NVIDIA Brev.
 
 | Metric | Value |
 |---|---:|
