@@ -26,8 +26,8 @@ This backlog is organized by sprint. It is intentionally written as an engineeri
 - [x] Add contributing standards.
 - [x] Initialize Git repository.
 - [ ] Create first commit.
-- [ ] Add architecture diagram placeholder.
-- [ ] Add screenshot placeholders when UI exists.
+- [x] Add architecture diagram.
+- [x] Add screenshot capture checklist when UI exists.
 
 ## Sprint 2: Dataset Design and Label Taxonomy
 
@@ -87,6 +87,15 @@ This backlog is organized by sprint. It is intentionally written as an engineeri
 - [ ] Compare against baselines.
 - [ ] Create model card.
 - [ ] Decide whether fine-tuned model is justified.
+
+## Sprint 5.5: Training Documentation and Evaluation Artifacts
+
+- [x] Document Week 5 fine-tuning results.
+- [x] Add training runbook.
+- [x] Add training summary artifact.
+- [x] Update README with training environment and reported metrics.
+- [x] Document engineering challenges solved.
+- [x] Confirm checkpoint and large model artifacts are excluded from Git.
 
 ## Sprint 6: Business Rules Engine
 

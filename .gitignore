@@ -66,7 +66,8 @@ cover/
 *.crt
 secrets/
 .pypirc
-.streamlit/secrets.toml
+.streamlit/
+!.streamlit/config.toml
 
 # Jupyter and notebooks
 .ipynb_checkpoints/
@@ -97,6 +98,7 @@ outputs/*
 !outputs/evaluation/
 !outputs/evaluation/.gitkeep
 !outputs/evaluation/*.md
+!outputs/evaluation/*.png
 *.pkl
 *.joblib
 *.pt
@@ -167,3 +169,13 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 cython_debug/
+
+# OpsTriage AI v2 generated report artifacts
+OpsTriage-AI-v2/reports/*.md
+OpsTriage-AI-v2/reports/*.csv
+!OpsTriage-AI-v2/reports/README.md
+!OpsTriage-AI-v2/reports/opstriage_v2_security_assessment_polished_20260707T053037Z.md
+!OpsTriage-AI-v2/reports/opstriage_v2_security_assessment_polished_20260707T053037Z.csv
+
+# Local LinkedIn/export assets
+assets/linkedin/*.png

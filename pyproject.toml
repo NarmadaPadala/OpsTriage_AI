@@ -40,8 +40,9 @@ dev = [
 where = ["src"]
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["tests", "OpsTriage-AI-v2/tests"]
 python_files = ["test_*.py"]
+pythonpath = ["src", "OpsTriage-AI-v2"]
 
 [tool.ruff]
 line-length = 100

@@ -68,8 +68,11 @@ flowchart TD
     E --> F["Qwen3-1.7B"]
     F --> G["LoRA Fine-Tuning"]
     G --> H["Fine-Tuned Adapter"]
-    H --> I["Evaluation"]
-    I --> J["Support Team Prediction"]
+    H --> I["Adapter-Backed Inference"]
+    I --> J["Approved-Label Validation"]
+    J --> L["Human Review Recommendation"]
+    H --> M["Classification Evaluation"]
+    M --> N["Confusion Matrix + Metrics"]
 
     VS["Local VS Code"] --> C
     GH["GitHub Repo"] --> VS
@@ -87,7 +90,7 @@ flowchart TD
     class A,B input;
     class C,D,E data;
     class F,G,H train;
-    class I,J eval;
+    class I,J,L,M,N eval;
     class VS,GH,K,LF platform;
 ```
 
@@ -97,8 +100,9 @@ System responsibilities:
 - **Validation:** Enforce required fields and approved support-team labels.
 - **Preprocessing:** Convert incidents into supervised fine-tuning records.
 - **AI Classification:** Fine-tune Qwen3-1.7B with LoRA for support-team prediction.
-- **Business Rules:** Future deterministic layer for confidence thresholds, missing information, and human review.
-- **Evaluation:** Track training results now and add classification-specific metrics in the next sprint.
+- **Inference Pipeline:** Load the base Qwen model plus LoRA adapter and return one approved label.
+- **Business Rules:** Validate the output label and recommend human review when confidence is unavailable.
+- **Evaluation:** Compute classification metrics from actual model predictions, not generation metrics alone.
 - **Artifact Governance:** Keep model checkpoints out of Git while preserving configs, data samples, and reports.
 
 ## Dataset Overview
@@ -154,6 +158,55 @@ Key files:
 - `docs/TrainingRunbook.md`
 - `docs/FineTuningResults.md`
 
+## Inference Workflow
+
+The production-inspired inference module lives in `src/inference/inference.py`.
+
+Input:
+
+- Incident title
+- Incident description
+
+Output:
+
+- Predicted support team
+- Model version
+- Inference time
+- Human review recommendation
+
+Run adapter-backed inference after copying the trained LoRA adapter into the documented checkpoint path:
+
+```bash
+python src/inference/inference.py \
+  --title "Claims API returning 504 errors" \
+  --description "Claims status lookups are timing out through the gateway for multiple call-center users."
+```
+
+The adapter path is:
+
+```text
+models/checkpoints/qwen3-1.7b-lora-opstriage-v0.1.0
+```
+
+The adapter files are intentionally excluded from Git. If they are missing, the inference module raises
+an explicit setup error instead of silently falling back to fake predictions.
+
+Example output contract:
+
+```json
+{
+  "predicted_team": "API Platform",
+  "model_version": "qwen3-1.7b-lora-opstriage-v0.1.0",
+  "inference_time_seconds": 1.2345,
+  "human_review_recommendation": "Human Review Recommended - prediction is label-valid, but this local pipeline does not compute calibrated confidence.",
+  "raw_model_output": "API Platform"
+}
+```
+
+The project does not fabricate confidence scores. A production version should compute token-level label
+probabilities, calibrate them on a held-out validation set, and set auto-routing thresholds with business
+owners.
+
 ## Evaluation Summary
 
 The Week 5 LLaMA Factory training run completed successfully on NVIDIA Brev.
@@ -165,9 +218,10 @@ The Week 5 LLaMA Factory training run completed successfully on NVIDIA Brev.
 | ROUGE-2 | 29.359 |
 | ROUGE-L | 34.4444 |
 
-These are the actual sequence-generation metrics reported by the fine-tuning workflow. They are not presented as classification accuracy.
+These are the actual sequence-generation metrics reported by the fine-tuning workflow. They are not
+presented as classification accuracy.
 
-Next evaluation work should add task-specific classification metrics:
+Classification evaluation is implemented in `scripts/evaluate_classification.py` and computes:
 
 - Accuracy
 - Precision
@@ -177,6 +231,74 @@ Next evaluation work should add task-specific classification metrics:
 - Invalid-label rate
 - Confusion matrix
 - Error analysis
+
+Generate adapter-backed test predictions first:
+
+```bash
+python scripts/run_inference_on_test_set.py
+```
+
+Then compute classification metrics:
+
+```bash
+python scripts/evaluate_classification.py \
+  --predictions outputs/evaluation/model_predictions.csv \
+  --output-dir outputs/evaluation
+```
+
+Current local status: classification metric code is ready, but no classification result is claimed in
+Git because the adapter-backed prediction CSV has not been generated in this checkout.
+
+## Base vs Fine-Tuned Comparison
+
+`scripts/compare_base_vs_finetuned.py` compares base `Qwen/Qwen3-1.7B` against the fine-tuned LoRA
+model on unseen incidents and writes `docs/BaseVsFineTuned.md`.
+
+The comparison is intentionally factual:
+
+- It records base-model and fine-tuned predictions.
+- It marks invalid labels instead of hiding them.
+- It does not claim improvement unless the output supports that claim.
+
+## Human-in-the-Loop Workflow
+
+OpsTriage AI recommends human review by default because the current inference layer validates labels
+but does not compute calibrated confidence.
+
+Production auto-routing should only be considered when:
+
+- The model returns exactly one approved label.
+- Calibrated confidence clears an agreed threshold.
+- The incident does not trigger restricted-data, outage, or security escalation rules.
+- Audit logging and human override are available.
+
+See `docs/HumanInLoop.md` for the full workflow.
+
+## Streamlit Demo
+
+Run the local demo:
+
+```bash
+streamlit run app.py
+```
+
+The demo includes:
+
+- Incident title and description inputs
+- Example incidents
+- Predicted support team
+- Model version
+- Inference time
+- Human review recommendation
+
+If the adapter artifacts are not present, the app displays a clear setup message rather than producing
+sample predictions.
+
+## Screenshots
+
+Screenshots should be captured after running the Streamlit app with local adapter artifacts available.
+The repository does not include a misleading prediction screenshot from a machine that cannot load the
+fine-tuned adapter.
 
 ## Engineering Challenges Solved
 
@@ -203,7 +325,9 @@ Next evaluation work should add task-specific classification metrics:
 ├── scripts/                   # Dataset preparation entry point
 ├── src/
 │   ├── config/                # Approved support-team taxonomy
+│   ├── inference/             # Adapter-backed inference pipeline
 │   └── preprocessing/         # Dataset validation and formatting utilities
+├── app.py                     # Streamlit demonstration app
 └── tests/                     # Unit tests for data preparation logic
 ```
 
@@ -222,13 +346,12 @@ Next evaluation work should add task-specific classification metrics:
 ## Future Roadmap
 
 - Expand dataset toward 500+ incidents
-- Add classification-specific evaluation pipeline
+- Generate adapter-backed classification results
 - Compare fine-tuned model against rules and traditional ML baselines
 - Build confusion matrix and error analysis reports
 - Add confidence handling and invalid-label detection
 - Add deterministic business rules for human review
 - Build an inference API
-- Build a Streamlit dashboard
 - Add feedback capture for continuous learning
 
 ## Responsible AI Positioning

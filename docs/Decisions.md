@@ -26,3 +26,18 @@ This document records major product, architecture, and engineering decisions.
 
 **Rationale:** Production incidents may contain PHI, PII, credentials, internal system names, or proprietary operational details.
 
+## ADR-004: No Fabricated Confidence Scores
+
+**Status:** Accepted
+
+**Decision:** OpsTriage AI will not display confidence scores until calibrated label probabilities are implemented and validated.
+
+**Rationale:** Uncalibrated scores can create false trust. The current product uses approved-label validation and recommends human review.
+
+## ADR-005: Evaluation Requires Actual Predictions
+
+**Status:** Accepted
+
+**Decision:** Classification metrics will be generated only from actual model predictions written to a prediction file.
+
+**Rationale:** Using ground-truth labels or generation-only metrics as classification results would overstate model performance and weaken interview credibility.
